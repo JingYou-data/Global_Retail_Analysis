@@ -50,8 +50,9 @@ ADDCOLUMNS (
                 "Autumn" )
 )
 ---
-
+```markdown
 ## 📈 Visual Insights
+
 ### 1. Executive Summary
 Overview of global KPIs including Total Revenue, Total Quantity, and Average Unit Price.
 ![Dashboard Overview](Media/Dashboard.png)
