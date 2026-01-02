@@ -17,6 +17,23 @@ Before visualization, I performed extensive ETL using **Pandas** to ensure data 
 * **Final Result:** **397,884 cleaned rows** generating a total revenue of **$8,911,407.90**.
 
 ---
+## 🧮 Technical Implementation (DAX & Modeling)
+
+### 1. Core Business Logic
+Established explicit measures to ensure calculation accuracy and report performance. Utilizing `SUMX` for row-level precision to calculate total revenue from quantity and unit price.
+
+```dax
+Sales Amount = 
+SUMX (
+    Online_Retail,
+    Online_Retail[Quantity] * Online_Retail[UnitPrice]
+)
+Total Quantity = SUM ( Online_Retail[Quantity] )
+
+## 2. Time Intelligence & Seasonality
+Developed a dynamic Calendar table to enable advanced temporal filtering. This powered the discovery that Q4 (Autumn) drives 35.48% of total sales volume.
+
+
 
 ## 📈 Visual Insights
 ### 1. Executive Summary
