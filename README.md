@@ -3,42 +3,52 @@
 
 ---
 
-## 🔗 Project Showcase
-* **[🚀 Interactive Live Dashboard](https://app.powerbi.com/view?r=eyJrIjoiZGE3NzBjZTUtZmNhOS00OTQwLTlmMGItNzU2MWYzMTQzOGJlIiwidCI6IjEwMWRhNTg3LTE4NDMtNGY1Mi04YjhhLTE3YjA2OWM2NmQzMyIsImMiOjJ9)**
-* **🎥 Video Walkthrough:** Available in the `/Media` folder.
+## 🎥 Project Demo
+* **[🚀 Live Interactive Dashboard](https://app.powerbi.com/view?r=eyJrIjoiZGE3NzBjZTUtZmNhOS00OTQwLTlmMGItNzU2MWYzMTQzOGJlIiwidCI6IjEwMWRhNTg3LTE4NDMtNGY1Mi04YjhhLTE3YjA2OWM2NmQzMyIsImMiOjJ9)**
+* **Video Walkthrough:** Found in `/Media/capstone video.mp4`
 
 ---
 
-## 📌 Business Case
-This project addresses the challenge of managing and analyzing large-scale international retail data. By leveraging a dataset of over **541,000 raw rows**, the solution provides executives with real-time tracking of revenue, seasonal trends, and regional market performance.
-
-### **High-Level Impact (Post-Cleaning)**
-* **Total Cleaned Revenue:** **$8.91 Million**.
-* **Processed Transactions:** **397,884 verified rows** (after rigorous ETL).
-* **Global Footprint:** Performance tracking across **30+ international markets** including UK, EIRE, and Hong Kong.
+## 🛠️ Data Engineering Pipeline (Python)
+Before visualization, I performed extensive ETL using **Pandas** to ensure data quality:
+* **Data Scale:** Processed **541,909 raw records**.
+* **Cleaning Logic:** * Removed **135,080 rows** with missing Customer IDs.
+    * Filtered out transactions with non-positive quantities and unit prices.
+* **Final Result:** **397,884 cleaned rows** generating a total revenue of **$8,911,407.90**.
 
 ---
 
-## 🛠️ The Technical Pipeline
+## 📈 Visual Insights
+### 1. Executive Summary
+Overview of global KPIs including Total Revenue, Total Quantity, and Average Unit Price.
+![Dashboard Overview](Media/Dashboard.png)
 
-### 1. Advanced ETL & Data Engineering (Python)
-I developed a robust cleaning pipeline using **Pandas** to ensure 100% data integrity:
-* **Missing Value Treatment:** Resolved **135,080 missing CustomerIDs** and **1,454 missing product descriptions**.
-* **Anomaly Filtering:** Systematically removed records with non-positive quantities and unit prices (`Quantity > 0` & `UnitPrice > 0`) to eliminate returns and data errors.
-* **Feature Engineering:** Created the `TotalAmount` metric to drive all financial reporting.
+### 2. Temporal Analysis
+Identifying sales peaks and seasonal trends. **Q4 (Autumn)** was identified as the highest-performing period.
+![Sales Trends](Media/Sales_Trends_by_Time.png)
 
-### 2. Multi-Dimensional Visual Analytics (Power BI)
-The dashboard features a professional UI with five specialized analytical views:
-* **Temporal Trends:** Discovered that **Autumn (Q4)** is the peak season, contributing **35.48% ($513.7K)** of revenue, with a massive surge in November.
-* **Geospatial Intelligence:** Identified the **United Kingdom** as the primary hub, while recognizing **Hong Kong** and **EIRE** as high-value growth regions.
-* **Pricing Strategy:** Benchmarked regional **Average Unit Prices ($7.76 global avg)** to identify premium market opportunities.
-* **Product Insight:** Detailed analysis of top-performing items like the **"Regency Cakestand"** to guide inventory restocking.
+### 3. Geospatial Intelligence
+Revenue distribution across international markets, highlighting the UK, EIRE, and Hong Kong.
+![Global Sales](Media/Sales_by_Country.png)
+
+### 4. Market Benchmarking
+Analysis of Average Unit Price by country and high-value product categories.
+![Pricing Analysis](Media/Unit_Price_vs_Country.png)
+![Category Analysis](Media/Country_Category.png)
 
 ---
 
 ## 📂 Repository Structure
 ```text
-├── Data/                   # Raw Online_Retail.csv (1.45M rows) & Samples
-├── Scripts/                # Python/Jupyter scripts for ETL (Online_Retail_powerbi.ipynb)
-├── Media/                  # Dashboard screenshots & walkthrough video
-└── README.md               # Professional project documentation
+├── Data/
+│   └── Online_Retail_Sample.csv    # 10,000 row sample for demonstration
+├── Scripts/
+│   └── Online_Retail_powerbi.ipynb # Python ETL & Data Cleaning
+├── Media/
+│   ├── capstone video.mp4         # Project walkthrough
+│   ├── Dashboard.png              # Screenshot
+│   ├── Sales_Trends_by_Time.png   # Screenshot
+│   ├── Sales_by_Country.png       # Screenshot
+│   ├── Unit_Price_vs_Country.png  # Screenshot
+│   └── Country_Category.png       # Screenshot
+└── README.md                       # Project documentation
