@@ -8,44 +8,28 @@
 * **Video Walkthrough:** Found in `/Media/capstone video.mp4`
 
 ---
-## 🧮 Technical Implementation (DAX & Modeling)
-1. Core Business Logic
-Established explicit measures to ensure calculation accuracy and report performance. Utilized SUMX for row-level precision to calculate total revenue from quantity and unit price.
 
+## 🛠️ Data Engineering Pipeline (Python)
+Before visualization, I performed extensive ETL using **Pandas** to ensure data quality:
+* **Data Scale:** Processed **541,909 raw records**.
+* **Cleaning Logic:**
+    * Removed **135,080 rows** with missing Customer IDs.
+    * Filtered out transactions with non-positive quantities and unit prices.
+* **Final Result:** **397,884 cleaned rows** generating a total revenue of **$8,911,407.90**.
+
+---
+
+## 🧮 Technical Implementation (DAX & Modeling)
+
+### 1. Core Business Logic
+Established explicit measures to ensure calculation accuracy and report performance. Utilized `SUMX` for row-level precision to calculate total revenue from quantity and unit price.
+
+```dax
 Sales Amount = 
 SUMX (
     Online_Retail,
     Online_Retail[Quantity] * Online_Retail[UnitPrice]
 )
-
-Total Quantity = SUM ( Online_Retail[Quantity] )
-
-2. Time Intelligence & Seasonality
-Developed a dynamic Calendar table to enable advanced temporal filtering. This powered the discovery that Q4 (Autumn) drives 35.48% of total sales volume.
-
-Calendar = 
-VAR _minDate = CALCULATE ( MIN ( Online_Retail[InvoiceDate] ), REMOVEFILTERS ( Online_Retail ) )
-VAR _maxDate = CALCULATE ( MAX ( Online_Retail[InvoiceDate] ), REMOVEFILTERS ( Online_Retail ) )
-RETURN
-ADDCOLUMNS (
-    CALENDAR ( _minDate, _maxDate ),
-    "Year", YEAR ( [Date] ),
-    "Month Name", FORMAT ( [Date], "MMM" ),
-    "Season", SWITCH ( TRUE(), 
-                MONTH ( [Date] ) IN { 12, 1, 2 }, "Winter",
-                MONTH ( [Date] ) IN { 3, 4, 5 },  "Spring",
-                MONTH ( [Date] ) IN { 6, 7, 8 },  "Summer", 
-                "Autumn" )
-)
-
----
-
-## 🛠️ Data Engineering Pipeline (Python)
-Before visualization, I performed extensive ETL using **Pandas** to ensure data quality:
-* **Data Scale:** Processed **541,909 raw records**.
-* **Cleaning Logic:** * Removed **135,080 rows** with missing Customer IDs.
-    * Filtered out transactions with non-positive quantities and unit prices.
-* **Final Result:** **397,884 cleaned rows** generating a total revenue of **$8,911,407.90**.
 
 ---
 
