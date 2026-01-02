@@ -30,7 +30,25 @@ SUMX (
     Online_Retail,
     Online_Retail[Quantity] * Online_Retail[UnitPrice]
 )
+---
+### 2. Time Intelligence & Seasonality
+Developed a dynamic `Calendar` table to enable advanced temporal filtering. This powered the discovery that **Q4 (Autumn)** drives **35.48%** of total sales volume.
 
+```dax
+Calendar = 
+VAR _minDate = CALCULATE ( MIN ( Online_Retail[InvoiceDate] ), REMOVEFILTERS ( Online_Retail ) )
+VAR _maxDate = CALCULATE ( MAX ( Online_Retail[InvoiceDate] ), REMOVEFILTERS ( Online_Retail ) )
+RETURN
+ADDCOLUMNS (
+    CALENDAR ( _minDate, _maxDate ),
+    "Year", YEAR ( [Date] ),
+    "Month Name", FORMAT ( [Date], "MMM" ),
+    "Season", SWITCH ( TRUE(), 
+                MONTH ( [Date] ) IN { 12, 1, 2 }, "Winter",
+                MONTH ( [Date] ) IN { 3, 4, 5 },  "Spring",
+                MONTH ( [Date] ) IN { 6, 7, 8 },  "Summer", 
+                "Autumn" )
+)
 ---
 
 ## 📈 Visual Insights
