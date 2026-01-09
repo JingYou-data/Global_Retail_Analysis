@@ -14,7 +14,7 @@ Before visualization, I performed extensive ETL using **Pandas** to ensure data 
 * **Data Scale:** Processed **541,909 raw records**.
 * **Cleaning Logic:**
     * Removed **135,080 rows** with missing Customer IDs.
-    * Filtered out transactions with non-positive quantities and unit prices.
+    * Keep transactions with non-positive quantities and unit prices.
 * **Final Result:** **397,884 cleaned rows** generating a total revenue of **$8,911,407.90**.
 
 ---
